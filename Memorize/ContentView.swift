@@ -8,31 +8,74 @@
 import SwiftUI
 
 struct ContentView: View {
-    let emojis: Array<String> = ["👻", "🕷️", "🎃", "😈", "💀", "🕸️", "🧙‍♀️", "🙀", "👹", "😱", "☠️", "🍭"]
+    let halloweenEmojis: Array<String> = ["👻", "🕷️", "🎃", "😈", "💀", "🕸️", "🧙‍♀️", "🙀", "👹", "😱", "☠️", "🍭"]
+    let farmEmojis: Array<String> = ["🐖", "🐐", "🐰", "🐴", "🐓", "🦃", "🚜", "🐑", "🐄", "🧑‍🌾", "🫏", ]
+    let sportsEmojis: Array<String> = ["⚽️", "🏈", "🏀", "⚾️", "🎾", "🏐", "🏓", "🏸", "🏒", "🥊"]
+
+    @State var emojis: Array<String>
     
     @State var cardCount: Int = 4
+    @State var themeChosen: Int = 0
+    
+    init()
+    {
+        emojis = halloweenEmojis + halloweenEmojis;
+        emojis.shuffle()
+    }
     
     var body: some View {
+        
         VStack
         {
+            title
+            themeChoosers
             ScrollView
             {
                 cards
             }
             Spacer()
-            cardCountAdjusters
+            //cardCountAdjusters
             
         }.padding()
     }
     
+    var title: some View
+    {
+        Text("Memorize").font(.largeTitle).bold()
+    }
+    
+    var themeChoosers: some View
+    {
+        HStack
+        {
+            themeButton(icon: "powersleep", title: "Halloween", action: halloweenEmojis)
+            themeButton(icon: "carrot", title: "Farm", action: farmEmojis)
+            themeButton(icon: "basketball.fill", title: "Sports", action: sportsEmojis)
+        }
+    }
+    
+    func themeButton(icon: String, title: String, action: Array<String>) -> some View
+    {
+        VStack
+        {
+            Button(action: {
+                emojis = action + action
+                emojis.shuffle()
+            }, label: {
+                Image(systemName: icon).font(.largeTitle)
+            })
+            Text(title).font(.subheadline)
+        }
+    }
+    
     var cards: some View
     {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
-            ForEach(0..<cardCount, id: \.self)
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 60))]) {
+            ForEach(0..<emojis.count, id: \.self)
             {
                 index in
                 CardView(content: emojis[index], isFaceUp: true)
-                    .aspectRatio(2/3, contentMode: .fit)
+                    .aspectRatio(4/5, contentMode: .fit)
             }
         }
         .foregroundColor(.orange)
@@ -52,7 +95,7 @@ struct ContentView: View {
     
     func cardCountAdjuster(by offset: Int, symbol: String) -> some View
     {
-        Button(action: {
+        return Button(action: {
             cardCount += offset
         }, label: {
             Image(systemName: symbol)
@@ -63,6 +106,7 @@ struct ContentView: View {
     var cardRemover: some View
     {
         cardCountAdjuster(by: -1, symbol: "rectangle.stack.fill.badge.minus")
+        
     }
     
     var cardAdder: some View
@@ -74,6 +118,8 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+
 
 struct CardView : View {
     let content: String
