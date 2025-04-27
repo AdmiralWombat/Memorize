@@ -11,16 +11,21 @@ struct ContentView: View {
     let halloweenEmojis: Array<String> = ["👻", "🕷️", "🎃", "😈", "💀", "🕸️", "🧙‍♀️", "🙀", "👹", "😱", "☠️", "🍭"]
     let farmEmojis: Array<String> = ["🐖", "🐐", "🐰", "🐴", "🐓", "🦃", "🚜", "🐑", "🐄", "🧑‍🌾", "🫏", ]
     let sportsEmojis: Array<String> = ["⚽️", "🏈", "🏀", "⚾️", "🎾", "🏐", "🏓", "🏸", "🏒", "🥊"]
+    
+    @State var cardBackgroundColor: Color = .orange
 
-    @State var emojis: Array<String>
+    @State var emojis: Array<String> = []
+    
+    @State var themeChosen: Int = 0
     
     @State var cardCount: Int = 4
-    @State var themeChosen: Int = 0
     
     init()
     {
         emojis = halloweenEmojis + halloweenEmojis;
-        emojis.shuffle()
+        
+        randomizeDeck(deckTheme: halloweenEmojis, backgroundColor: .orange)
+    
     }
     
     var body: some View {
@@ -48,19 +53,30 @@ struct ContentView: View {
     {
         HStack
         {
-            themeButton(icon: "powersleep", title: "Halloween", action: halloweenEmojis)
-            themeButton(icon: "carrot", title: "Farm", action: farmEmojis)
-            themeButton(icon: "basketball.fill", title: "Sports", action: sportsEmojis)
+            themeButton(icon: "powersleep", title: "Halloween", action: halloweenEmojis, backgroundColor: .orange)
+            themeButton(icon: "carrot", title: "Farm", action: farmEmojis, backgroundColor: .green)
+            themeButton(icon: "basketball.fill", title: "Sports", action: sportsEmojis, backgroundColor: .black)
         }
     }
     
-    func themeButton(icon: String, title: String, action: Array<String>) -> some View
+    func randomizeDeck(deckTheme: Array<String>, backgroundColor: Color)
+    {
+        let emojisRandom = deckTheme.shuffled()
+        cardCount = 6//Int.random(in: 2...deckTheme.count)
+        let emojisTrimmed = Array(emojisRandom[0..<cardCount])
+        
+       
+        emojis = emojisTrimmed + emojisTrimmed
+        emojis.shuffle()
+        cardBackgroundColor = backgroundColor
+    }
+    
+    func themeButton(icon: String, title: String, action: Array<String>, backgroundColor: Color) -> some View
     {
         VStack
         {
             Button(action: {
-                emojis = action + action
-                emojis.shuffle()
+                randomizeDeck(deckTheme: action, backgroundColor: backgroundColor)
             }, label: {
                 Image(systemName: icon).font(.largeTitle)
             })
@@ -68,50 +84,25 @@ struct ContentView: View {
         }
     }
     
+    func widthThatBestFits(count: Int) -> CGFloat
+    {
+        
+        return (-60.0 / 7.0) * (Double(count)) + (1020.0/7.0)
+    }
+    
     var cards: some View
     {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 60))]) {
+        let cardWidth = widthThatBestFits(count: cardCount)
+        print (cardWidth)
+        return LazyVGrid(columns: [GridItem(.adaptive(minimum: cardWidth))]) {
             ForEach(0..<emojis.count, id: \.self)
             {
                 index in
-                CardView(content: emojis[index], isFaceUp: true)
-                    .aspectRatio(4/5, contentMode: .fit)
+                CardView(content: emojis[index], isFaceUp: false)
+                    .aspectRatio(2/3, contentMode: .fit)
             }
         }
-        .foregroundColor(.orange)
-    }
-    
-    var cardCountAdjusters: some View
-    {
-        HStack
-        {
-            cardRemover
-            Spacer()
-            cardAdder
-        }
-        .imageScale(.large)
-        .font(.largeTitle)
-    }
-    
-    func cardCountAdjuster(by offset: Int, symbol: String) -> some View
-    {
-        return Button(action: {
-            cardCount += offset
-        }, label: {
-            Image(systemName: symbol)
-        })
-        .disabled(cardCount + offset < 1 || cardCount + offset > emojis.count)
-    }
-    
-    var cardRemover: some View
-    {
-        cardCountAdjuster(by: -1, symbol: "rectangle.stack.fill.badge.minus")
-        
-    }
-    
-    var cardAdder: some View
-    {
-        cardCountAdjuster(by: 1, symbol: "rectangle.stack.fill.badge.plus")
+        .foregroundColor(cardBackgroundColor)
     }
 }
 
