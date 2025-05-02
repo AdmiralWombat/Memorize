@@ -27,6 +27,7 @@ struct EmojiMemoryGameView: View {
             ScrollView
             {
                 cards
+                    .animation(.default, value: viewModel.cards)
             }
             Spacer()
             Button("Shuffle")
@@ -89,12 +90,15 @@ struct EmojiMemoryGameView: View {
         let cardWidth = widthThatBestFits(count: cardCount)
 
         return LazyVGrid(columns: [GridItem(.adaptive(minimum: cardWidth), spacing: 0)], spacing: 0) {
-            ForEach(viewModel.cards.indices, id: \.self)
+            ForEach(viewModel.cards)
             {
-                index in
-                CardView(viewModel.cards[index])
+                card in
+                CardView(card)
                     .aspectRatio(2/3, contentMode: .fit)
                     .padding(4)
+                    .onTapGesture {
+                        viewModel.choose(card)
+                    }
             }
         }
         .foregroundColor(cardBackgroundColor)
@@ -128,6 +132,8 @@ struct CardView : View {
             }
             .opacity(card.isFaceUp ? 1 : 0)
             base.fill().opacity(card.isFaceUp ? 0 : 1)
+            
         }
+        .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
     }
 }
