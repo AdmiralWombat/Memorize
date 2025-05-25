@@ -11,17 +11,31 @@ import SwiftUI
 
 class EmojiMemoryGame : ObservableObject
 {
-    private static let halloweenEmojis = ["👻", "🕷️", "🎃", "😈", "💀", "🕸️", "🧙‍♀️", "🙀", "👹", "😱", "☠️", "🍭"]
-    private static let farmEmojis = ["🐖", "🐐", "🐰", "🐴", "🐓", "🦃", "🚜", "🐑", "🐄", "🧑‍🌾", "🫏", ]
-    private static let sportsEmojis = ["⚽️", "🏈", "🏀", "⚾️", "🎾", "🏐", "🏓", "🏸", "🏒", "🥊"]
+    typealias Card = MemoryGame<String>.Card
     
-    private static let emojis = ["👻", "🕷️", "🎃", "😈", "💀", "🕸️", "🧙‍♀️", "🙀", "👹", "😱", "☠️", "🍭"]
+    @Published private var model : MemoryGame<String>
+    private var theme : MemoryTheme
     
-    private static func createMemoryGame() -> MemoryGame<String>
+    init(memoryTheme: MemoryTheme)
     {
-        return MemoryGame(numberOfPairsOfCards: 5)
+        //let defaultTheme = setTheme[0]
+        //theme = setTheme.randomElement() ?? defaultTheme
+        
+        //let defaultTheme = MemoryTheme.builtins[0]
+        //theme = MemoryTheme.builtins.randomElement() ?? defaultTheme
+        theme = memoryTheme
+        
+        model = EmojiMemoryGame.createMemoryGame(gameTheme: theme)
+
+    }
+    
+    private static func createMemoryGame(gameTheme : MemoryTheme) -> MemoryGame<String>
+    {
+        let emojis = gameTheme.emoji.shuffled()
+        return MemoryGame(numberOfPairsOfCards: gameTheme.numberOfPairs)
         {
             pairIndex in
+            
             if (emojis.indices.contains(pairIndex))
             {
                 return emojis[pairIndex]
@@ -30,18 +44,32 @@ class EmojiMemoryGame : ObservableObject
             {
                 return "⚠️"
             }
-                
         }
     }
     
-    @Published private var model = createMemoryGame()
+    
 
-    var cards: Array<MemoryGame<String>.Card>
+    var cards: Array<Card>
     {
         return model.cards
     }
     
-    func choose(_ card: MemoryGame<String>.Card)
+    var themeName: String
+    {
+        return theme.themeName
+    }
+    
+    var themeColor: Color
+    {
+        return Color(rgba: theme.themeColor)
+    }
+    
+    var score: Int
+    {
+        return model.score
+    }
+    
+    func choose(_ card: Card)
     {
         model.choose(card: card)
     }
@@ -51,5 +79,16 @@ class EmojiMemoryGame : ObservableObject
     func shuffle()
     {
         model.shuffle()
+    }
+    
+    func newGame()
+    {
+       
+        /*let defaultTheme = MemoryTheme.builtins[0]
+        theme = MemoryTheme.builtins.randomElement() ?? defaultTheme
+        
+        model = EmojiMemoryGame.createMemoryGame(gameTheme: theme)
+        model.shuffle()*/
+   
     }
 }

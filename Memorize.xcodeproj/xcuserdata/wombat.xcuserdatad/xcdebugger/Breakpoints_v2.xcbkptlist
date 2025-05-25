@@ -14,8 +14,8 @@
             filePath = "Memorize/MemoryGame.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "shuffle()"
             landmarkType = "7">
          </BreakpointContent>
@@ -23,17 +23,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F8F03275-3209-4718-A53A-B8529257F04C"
+            uuid = "41E340E2-FE44-48F0-94BA-E7CC0EBA3454"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Memorize/EmojiMemoryGame.swift"
+            filePath = "Memorize/ThemeEditor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "shuffle()"
-            landmarkType = "7">
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "ThemeEditor"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "41E340E2-FE44-48F0-94BA-E7CC0EBA3454 - f307a5cf0bc53003"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.focused&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Hashable&gt;(_: SwiftUI.FocusState&lt;&#x3c4;_1_0&gt;.Binding, equals: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of Memorize.ThemeEditor.removeEmojis : some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.focused&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Hashable&gt;(_: SwiftUI.FocusState&lt;&#x3c4;_1_0&gt;.Binding, equals: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.focused&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Hashable&gt;(_: SwiftUI.FocusState&lt;&#x3c4;_1_0&gt;.Binding, equals: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of Memorize.ThemeEditor.removeEmojis : some&gt;&gt;.0)&gt;, SwiftUI.EmptyView&gt;)&gt; in Memorize.ThemeEditor.body.getter : some"
+                  moduleName = "Memorize.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wombat/Documents/CodeProjects/Memorize2/Memorize/ThemeEditor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40">
+               </Location>
+               <Location
+                  uuid = "41E340E2-FE44-48F0-94BA-E7CC0EBA3454 - f542d2fe36dedb65"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Character) -&gt; Swift.String in closure #1 () -&gt; () in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.focused&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Hashable&gt;(_: SwiftUI.FocusState&lt;&#x3c4;_1_0&gt;.Binding, equals: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of Memorize.ThemeEditor.removeEmojis : some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.focused&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Hashable&gt;(_: SwiftUI.FocusState&lt;&#x3c4;_1_0&gt;.Binding, equals: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.focused&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Hashable&gt;(_: SwiftUI.FocusState&lt;&#x3c4;_1_0&gt;.Binding, equals: &#x3c4;_1_0) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of Memorize.ThemeEditor.removeEmojis : some&gt;&gt;.0)&gt;, SwiftUI.EmptyView&gt;)&gt; in Memorize.ThemeEditor.body.getter : some"
+                  moduleName = "Memorize.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wombat/Documents/CodeProjects/Memorize2/Memorize/ThemeEditor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
